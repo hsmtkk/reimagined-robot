@@ -1,6 +1,4 @@
-from typing import List
-
-from fastapi import APIRouter, Depends, HTTPException, Path
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 import cruds.address as crud
@@ -11,9 +9,9 @@ import schemas.address as schema
 router = APIRouter(prefix="/address")
 
 
-@router.post("/")
+@router.post("/", response_model=schema.Address)
 async def create(
-    address: schema.Address,
+    address: schema.AddressCreate,
     user: dict = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
