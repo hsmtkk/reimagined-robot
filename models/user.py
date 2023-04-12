@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Boolean
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
 from sqlalchemy.orm import relationship
 
 from database import Base
@@ -13,5 +13,8 @@ class User(Base):
     last_name = Column(String)
     hashed_password = Column(String)
     is_active = Column(Boolean, default=True)
+    phone_number = Column(String)
+    address_id = Column(Integer, ForeignKey("addresses.id"))
 
     todos = relationship("Todo", back_populates="owner")
+    address = relationship("Addresses", back_populates="user_address")
