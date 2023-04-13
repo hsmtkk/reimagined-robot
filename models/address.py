@@ -14,4 +14,4 @@ class Address(Base):
     country = Column(String)
     postalcode = Column(String)
 
-    user_address = relationship("Users", back_populates="address")
+    user_address = relationship("User", back_populates="address")
